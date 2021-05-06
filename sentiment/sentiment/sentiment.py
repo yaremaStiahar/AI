@@ -43,7 +43,7 @@ def search(data):
 
     try:
         driver.get("https://www.google.co.uk")
-        search_field = driver.find_element_by_xpath("//*[@id=\"tsf\"]/div[2]/div[1]/div[1]/div/div[2]/input")
+        search_field = driver.find_element_by_xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
         search_field.send_keys(data)
         search_field.send_keys(Keys.RETURN)
     except:
@@ -52,14 +52,18 @@ def search(data):
 
     s = []
 
-    for j in range(1, 4):
-        for i in range(1, url_count):
+    for j in range(1, 10):
+        for i in range(1, 2):
             try:
                 driver.get("https://www.google.co.uk")
-                search_field = driver.find_element_by_xpath("//*[@id=\"tsf\"]/div[2]/div[1]/div[1]/div/div[2]/input")
+                search_field = driver.find_element_by_xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
                 search_field.send_keys(data)
                 search_field.send_keys(Keys.RETURN)
-                s1 = driver.find_element_by_xpath(f"//*[@id=\"rso\"]/div[{j}]/div/div[{i}]/div/div/div[1]/a[1]/h3")
+                s1 = driver.find_element_by_xpath(f"//*[@id=\"rso\"]/div[{j}]/div/div/div[1]/a/h3")
+                #//*[@id="rso"]/div[1]/div/div/div/div[1]/a/h3
+                #//*[@id="rso"]/div[3]/div/div/div[1]/a/h3
+                #//*[@id=\"rso\"]/div[{j}]/div/div[{i}]/div/div/div[1]/a[1]/h3
+                #s1 = driver.find_element_by_xpath(f"//*[@id=\"rso\"]/div[{j}]/div/div[{i}]/div/div/div[1]/a[1]/h3")
                 s1.click()
                 page_html = driver.page_source
                 s.append(find_text(page_html))
